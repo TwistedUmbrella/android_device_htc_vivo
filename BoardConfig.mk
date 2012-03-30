@@ -44,11 +44,11 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
 
 # Additional Camera hacks for vivo
 BOARD_HAVE_HTC_FFC := true
-BOARD_USE_REVERSE_FFC := false
+BOARD_USE_REVERSE_FFC := true
 
 # Wifi Specific Defines
 WIFI_DRIVER_MODULE_ARG := "firmware_path=/vendor/firmware/fw_bcm4329.bin nvram_path=/proc/calibration iface_name=wlan"
-#TARGET_CUSTOM_IFACE := eth0
+#TARGET_CUSTOM_IFACE := wlan
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 585101312
