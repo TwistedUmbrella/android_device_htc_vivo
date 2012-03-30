@@ -1,4 +1,5 @@
 import init.msm7x30.usb.rc
+import init.htc.kernel.rc
 
 on early-init
     export EXTERNAL_STORAGE /mnt/sdcard
@@ -14,7 +15,11 @@ on early-fs
     mount ext4 /dev/block/mmcblk0p25 /system wait ro noatime nodiratime barrier=0 nouser_xattr
     mount ext4 /dev/block/mmcblk0p26 /data wait noatime nodiratime nosuid nodev barrier=0 noauto_da_alloc nouser_xattr
     mount ext4 /dev/block/mmcblk0p27 /cache wait noatime nodiratime nosuid nodev barrier=0 nouser_xattr
-    mount ext4 /dev/block/mmcblk0p28 /devlog wait noatime nodiratime nosuid nodev barrier=0 nouser_xattrimport init.htc7x30.usb.rc
+    mount ext4 /dev/block/mmcblk0p28 /devlog wait noatime nodiratime nosuid nodev barrier=0 nouser_xattr
+
+    symlink /system/vendor/firmware/fw_bcm4329.bin /vendor/firmware/fw_bcm4329.bin
+    symlink /system/vendor/firmware/fw_bcm4329_apsta.bin /vendor/firmware/fw_bcm4329_apsta.bin
+    symlink /system/vendor/firmware/bcm4329.hcd /vendor/firmware/bcm4329.hcd
 
 on boot
     mkdir /data/radio 0770 radio radio
@@ -141,34 +146,30 @@ service sysinit /system/bin/logwrapper /system/xbin/run-parts /system/etc/init.d
 
 # bugreport is triggered by the KEY_VOLUMEUP and BTN_MOUSE keycodes
 service bugreport /system/bin/bugmailer.sh -v
-    class main
     disabled
     oneshot
     keycodes 114 115
 
 service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm \
     --baudrate 3000000 --patchram /vendor/firmware/bcm4329.hcd /dev/ttyHS0
-    class main
     user bluetooth
     group bluetooth net_bt_admin
     disabled
 
 service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p13 /dev/block/mmcblk0p14
-    class main
     user root
+    disabled
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
     stop netmgrd
 
 service htc_ebdlogd /system/bin/htc_ebdlogd -s -k -P 7
-    class main
     user root
     disabled
     oneshot
 
 service htc_ebdlogd_rel /system/bin/htc_ebdlogd -s -k
-    class main
     user root
     disabled
     oneshot
