@@ -180,3 +180,7 @@ PRODUCT_NAME := htc_vivo
 PRODUCT_DEVICE := vivo
 PRODUCT_MODEL := HTC Incredible S
 PRODUCT_MANUFACTURER := HTC
+
+#Softkey Rotation Script
+PRODUCT_COPY_FILES += \
+    device/htc/vivo/rotate_lights.sh:/system/etc/rotate_lights.sh
