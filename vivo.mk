@@ -131,6 +131,10 @@ PRODUCT_COPY_FILES += \
     device/htc/vivo/system/etc/soundimage/srsfx_trumedia_music.cfg:system/etc/soundimage/srsfx_trumedia_music.cfg \
     device/htc/vivo/system/etc/soundimage/srsfx_trumedia_voice.cfg:system/etc/soundimage/srsfx_trumedia_voice.cfg 
 
+# Additional NAM GPS Package
+PRODUCT_COPY_FILES += \
+    device/htc/common/system/etc/gps.conf:system/etc/nam/gps.conf
+
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
@@ -178,7 +182,7 @@ $(call inherit-product, build/target/product/full_base.mk)
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := htc_vivo
 PRODUCT_DEVICE := vivo
-PRODUCT_MODEL := HTC Incredible S
+PRODUCT_MODEL := Incredible S
 PRODUCT_MANUFACTURER := HTC
 
 #Softkey Rotation Script
