@@ -137,12 +137,12 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_COPY_FILES += \
     device/htc/vivo/system/etc/vold.fstab:system/etc/vold.fstab
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/htc/vivo/kernel/kernel
-else
-	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
+TARGET_PREBUILT_KERNEL := device/htc/vivo/kernel/kernel
 
+ifneq ($(TARGET_PREBUILT_KERNEL),)
+
+# Local Kernel
+LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
@@ -152,9 +152,15 @@ PRODUCT_COPY_FILES += $(shell \
     | sed -r 's/^\/?(.*\/)([^/ ]+)$$/\1\2:system\/lib\/modules\/\2/' \
     | tr '\n' ' ')
 
+endif
+
 # Script to signal boot completion for init.d
 PRODUCT_COPY_FILES += \
     device/htc/vivo/kernel/etc/init.d/100complete:system/etc/init.d/100complete
+
+# Softkey Rotation Script
+PRODUCT_COPY_FILES += \
+    device/htc/vivo/rotate_lights.sh:/system/etc/rotate_lights.sh
 
 # common msm7x30 configs
 $(call inherit-product, device/htc/msm7x30-common/msm7x30.mk)
@@ -170,12 +176,7 @@ $(call inherit-product, device/htc/common/common.mk)
 
 $(call inherit-product, build/target/product/full_base.mk)
 
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := htc_vivo
 PRODUCT_DEVICE := vivo
 PRODUCT_MODEL := Incredible S
 PRODUCT_MANUFACTURER := HTC
-
-#Softkey Rotation Script
-PRODUCT_COPY_FILES += \
-    device/htc/vivo/rotate_lights.sh:/system/etc/rotate_lights.sh

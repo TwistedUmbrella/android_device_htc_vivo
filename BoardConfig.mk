@@ -55,7 +55,6 @@ BOARD_FLASH_BLOCK_SIZE := 262144
 TARGET_SPECIFIC_HEADER_PATH := device/htc/msm7x30-common/include
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/common
-TARGET_PREBUILT_KERNEL := device/htc/vivo/kernel/kernel
 
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
