@@ -137,14 +137,14 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_COPY_FILES += \
     device/htc/vivo/system/etc/vold.fstab:system/etc/vold.fstab
 
-TARGET_PREBUILT_KERNEL := device/htc/vivo/kernel/kernel
+TARGET_PREBUILT_KERNEL := device/htc/vivo/kernel/zImage
 
 ifneq ($(TARGET_PREBUILT_KERNEL),)
 
 # Local Kernel
 LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
+    $(LOCAL_KERNEL):zImage
 
 # Kernel Modules
 PRODUCT_COPY_FILES += $(shell \
